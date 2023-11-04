@@ -20,6 +20,7 @@ public class ApiService
     public ApiService(HttpClient httpClient) //Konstruktor klasy ApiService
     {
         _httpClient = httpClient; // Konstruktor klasy ApiService, inicjalizuje pole _httpClient za pomocą dostarczonego obiektu HttpClient.
+        Tags = new string[0];
     }
 
     public async Task<QuestionModel[]> GetQuestionsAsync() // Pobiera pytania z API na podstawie wybranych parametrów i zwraca je jako tablicę QuestionModel.
@@ -53,7 +54,8 @@ public class ApiService
         }
 
         // Tworzenie pełnego URL z parametrami
-        HttpResponseMessage response = await _httpClient.GetAsync("https://quizapi.io/api/v1/questions?apiKey=" + _apiKey + category + difficulty + limit + tag);
+        var apiUrl = "https://quizapi.io/api/v1/questions?apiKey=" + _apiKey + category + difficulty + limit + tag;
+        HttpResponseMessage response = await _httpClient.GetAsync(apiUrl);
 
         if (response.IsSuccessStatusCode) // Sprawdza, czy odpowiedź HTTP ma status sukcesu, co oznacza, że żądanie zostało pomyślnie obsłużone.
         {

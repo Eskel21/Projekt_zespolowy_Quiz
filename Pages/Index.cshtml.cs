@@ -14,8 +14,33 @@ namespace Projekt_zespołowy_Quiz.Pages
 
         public QuestionModel[] Questions { get; set; }  // Właściwość przechowująca pytania.
 
-        public async Task OnGet()
+        [BindProperty(SupportsGet = true)]
+        public string SelectedCategory { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public string SelectedDifficulty { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public string SelectedTags { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public int SelectedLimit { get; set; }
+
+        public async Task OnPost()
         {
+            // Przekaż parametry filtrujące do serwisu API
+            _apiService.category_name = SelectedCategory;
+            _apiService.difficulty_name = SelectedDifficulty;
+            if (SelectedTags != null)
+            {
+                _apiService.Tags = SelectedTags.Split(',');
+            }
+            else
+            {
+                _apiService.Tags = new string[0];
+            }
+            
+            _apiService.limit_number = SelectedLimit;
             Questions = await _apiService.GetQuestionsAsync();  // Metoda OnGet, asynchronicznie pobiera pytania z ApiService i przypisuje je do właściwości Questions.
         }
     }
