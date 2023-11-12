@@ -31,30 +31,11 @@
             <option value="hard">Hard</option>
         </select>
     </div>
-    <div class="form-group">
-        <label for="SelectedTags">Tagi (oddzielone przecinkami):</label>
-        <select class="form-control" id="tags" asp-for="SelectedTags">
-            <option value="">Wybierz tagi</option>
-            <option value="BASH">BASH</option>
-            <option value="DevOps">DevOps</option>
-            <option value="Docker">Docker</option>
-            <option value="HTML">HTML</option>
-            <option value="JavaScript">JavaScript</option>
-            <option value="Kubernetes">Kubernetes</option>
-            <option value="Laravel">Laravel</option>
-            <option value="Linux">Linux</option>
-            <option value="MySQL">MySQL</option>
-            <option value="PHP">PHP</option>
-            <option value="WordPress">WordPress</option>
-
-
-        </select>
-    </div>
    
     <div class="form-group">
         <label for="SelectedLimit">Limit pytań:</label>
         <select class="form-control" id="limit" asp-for="SelectedLimit">
-            <option value="">10</option>
+            <option value="">20</option>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -90,67 +71,123 @@
                 <tr>
                     <th>Question</th>
                     <th>Id </th>
-                    <th>Description</th>
                     <th>Answers</th>
                     <th>MultipleCorrectAnswers </th>
                     <th>Correct Answers</th>
                     <th>Correct Answer</th>
-                    <th>Explanation </th>
-                    <th>Tip</th>
                     <th>Category</th>
                     <th>Difficulty</th>
-                    <th>Tags</th>
                 </tr>
             </thead>
             <tbody>
+                @{
+                  List<QuestionModel> Pytania = new List<QuestionModel>();
+                }
                 @foreach (var question in Model.Questions)
                 {
+                    
+                        Pytania.Add(question);
+                }
+                @foreach(var pytanie in Pytania)
+                {
                     <tr>
-                        <td>@question.Question</td>
-                        <td>@question.Id</td>
-                        <td>@question.Description</td>
+                        <td>@pytanie.Question</td>
+                        <td>@pytanie.Id</td>
                         <td>
                             <ul>
-                                <li>@question.Answers.Answer_A</li>
-                                <li>@question.Answers.Answer_B</li>
-                                <li>@question.Answers.Answer_C</li>
-                                <li>@question.Answers.Answer_D</li>
-                                <li>@question.Answers.Answer_E</li>
-                                <li>@question.Answers.Answer_F</li>
+                                <li>@pytanie.Answers.Answer_A</li>
+                                <li>@pytanie.Answers.Answer_B</li>
+                                <li>@pytanie.Answers.Answer_C</li>
+                                <li>@pytanie.Answers.Answer_D</li>
+                                <li>@pytanie.Answers.Answer_E</li>
+                                <li>@pytanie.Answers.Answer_F</li>
                             </ul>
                         </td>
-                        <td>@question.MultipleCorrectAnswers</td>
+                        <td>@pytanie.MultipleCorrectAnswers</td>
                         <td>
                             <ul>
-                                <li>@question.Correct_Answers.Answer_A_Correct.ToString()</li>
-                                <li>@question.Correct_Answers.Answer_B_Correct.ToString()</li>
-                                <li>@question.Correct_Answers.Answer_C_Correct.ToString()</li>
-                                <li>@question.Correct_Answers.Answer_D_Correct.ToString()</li>
-                                <li>@question.Correct_Answers.Answer_E_Correct.ToString()</li>
-                                <li>@question.Correct_Answers.Answer_F_Correct.ToString()</li>
+                                <li>@pytanie.Correct_Answers.Answer_A_Correct.ToString()</li>
+                                <li>@pytanie.Correct_Answers.Answer_B_Correct.ToString()</li>
+                                <li>@pytanie.Correct_Answers.Answer_C_Correct.ToString()</li>
+                                <li>@pytanie.Correct_Answers.Answer_D_Correct.ToString()</li>
+                                <li>@pytanie.Correct_Answers.Answer_E_Correct.ToString()</li>
+                                <li>@pytanie.Correct_Answers.Answer_F_Correct.ToString()</li>
                             </ul>
                         </td>
-                        <td>@question.Correct_Answer</td>
-                        <td>@question.Explanation</td>
-                        <td>@question.Tip</td>
-                        <td>@question.Category</td>
-                        <td>@question.Difficulty</td>
-                        <td>
-                            @foreach (var tag in question.Tags)
-                            {
-                                <ul>@tag.Name</ul>
-                            }
-                        </td>
+                        <td>@pytanie.Correct_Answer</td>
+                        <td>@pytanie.Category</td>
+                        <td>@pytanie.Difficulty</td>
                     </tr>
                 }
             </tbody>
         </table>
+        <div id="questionsContainer">
+                       
+        </div>
+
+        <button id="nextButton">Next Question</button>
     }
     else
     {
         <p>Brak dostępnych pytań.</p>
     }
 </div>
+<script>
+    // Tablica z pytaniami
+    var questions = @Html.Raw(Json.Serialize(Model.Questions));
+   
+
+    // Pobierz referencje do elementów DOM
+    var questionsContainer = document.getElementById("questionsContainer");
+    var nextButton = document.getElementById("nextButton");
+
+    // Zmienna do przechowywania aktualnego indeksu pytania
+    var currentQuestionIndex = 0;
+
+    // Funkcja do wyświetlania pytania
+    function displayNextQuestion() {
+        if (currentQuestionIndex < questions.length) {
+            var currentQuestion = questions[currentQuestionIndex];
+            
+
+            // Log the entire currentQuestion object to the console
+            console.log(currentQuestion);
+
+            // Assuming 'text' is the property containing the question text, modify this line accordingly
+            if (currentQuestion.answers.answer_A != null && currentQuestion.answers.answer_B != null && currentQuestion.answers.answer_C != null && currentQuestion.answers.answer_D != null && currentQuestion.answers.answer_E != null && currentQuestion.answers.answer_F != null) {
+
+                questionsContainer.innerHTML = currentQuestion.question + "<br>" + "A " + currentQuestion.answers.answer_A + "<br>" + "B " + currentQuestion.answers.answer_B + "<br>" + "C " + currentQuestion.answers.answer_C + "<br>" + "D " + currentQuestion.answers.answer_D + "<br>" + "E " + currentQuestion.answers.answer_E + "<br>" + "F " + currentQuestion.answers.answer_F + "<br>";
+            }
+            else if (currentQuestion.answers.answer_A != null && currentQuestion.answers.answer_B != null && currentQuestion.answers.answer_C != null && currentQuestion.answers.answer_D != null && currentQuestion.answers.answer_E != null) {
+                questionsContainer.innerHTML = currentQuestion.question + "<br>" + "A " + currentQuestion.answers.answer_A + "<br>" + "B " + currentQuestion.answers.answer_B + "<br>" + "C " + currentQuestion.answers.answer_C + "<br>" + "D " + currentQuestion.answers.answer_D + "<br>" + "E " + currentQuestion.answers.answer_E + "<br>";
+            }
+            else if (currentQuestion.answers.answer_A != null && currentQuestion.answers.answer_B != null && currentQuestion.answers.answer_C != null && currentQuestion.answers.answer_D != null) {
+                questionsContainer.innerHTML = currentQuestion.question + "<br>" + "A " + currentQuestion.answers.answer_A + "<br>" + "B " + currentQuestion.answers.answer_B + "<br>" + "C " + currentQuestion.answers.answer_C + "<br>" + "D " + currentQuestion.answers.answer_D + "<br>";
+            }
+            else if (currentQuestion.answers.answer_A != null && currentQuestion.answers.answer_B != null && currentQuestion.answers.answer_C != null) {
+                questionsContainer.innerHTML = currentQuestion.question + "<br>" + "A " + currentQuestion.answers.answer_A + "<br>" + "B " + currentQuestion.answers.answer_B + "<br>" + "C " + currentQuestion.answers.answer_C + "<br>";
+            }
+            else if (currentQuestion.answers.answer_A != null && currentQuestion.answers.answer_B != null) {
+                questionsContainer.innerHTML = currentQuestion.question + "<br>" + "A " + currentQuestion.answers.answer_A + "<br>" + "B " + currentQuestion.answers.answer_B + "<br>";
+            }
+           
+            currentQuestionIndex++;
+        } else {
+            questionsContainer.innerHTML = "Koniec pytań!";
+        }
+    }
+
+    // Dodaj obsługę zdarzenia kliknięcia przycisku
+    nextButton.addEventListener("click", displayNextQuestion);
+
+    // Wywołaj funkcję, aby wyświetlić pierwsze pytanie
+    displayNextQuestion();
+</script>
+
+
+
+
+
 
 
 

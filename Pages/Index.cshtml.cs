@@ -6,6 +6,7 @@ namespace Projekt_zespołowy_Quiz.Pages
     public class IndexModel : PageModel
     {
         private readonly ApiService _apiService;  // Prywatne pole przechowujące instancję klasy ApiService.
+        public QuestionModel[] Pytania { get; set; }
 
         public IndexModel(ApiService apiService)
         {
