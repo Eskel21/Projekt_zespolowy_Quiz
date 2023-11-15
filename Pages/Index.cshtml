@@ -6,9 +6,9 @@
 }
 <form method="post">
     <div class="form-group">
-        <label for="SelectedCategory">Kategoria:</label>
+        <label for="SelectedCategory">Category:</label>
         <select class="form-control" id="category" asp-for="SelectedCategory">
-            <option value="">Wybierz kategorię</option>
+            <option value="">Choose category</option>
             <option value="linux">Linux</option>
             <option value="bash">Bash</option>
             <option value="uncategorized">Uncategorized</option>
@@ -20,9 +20,9 @@
         </select>
     </div>
     <div class="form-group">
-        <label for="SelectedDifficulty">Poziom trudności:</label>
+        <label for="SelectedDifficulty">Difficulty:</label>
         <select class="form-control" id="difficulty" asp-for="SelectedDifficulty">
-            <option value="">Wybierz poziom trudności</option>
+            <option value="">Choose difficulty</option>
             <option value="easy">Easy</option>
             <option value="medium">Medium</option>
             <option value="hard">Hard</option>
@@ -30,7 +30,7 @@
     </div>
 
     <div class="form-group">
-        <label for="SelectedLimit">Limit pytań:</label>
+        <label for="SelectedLimit">Number of questions:</label>
         <select class="form-control" id="limit" asp-for="SelectedLimit">
             <option value="">20</option>
             <option value="1">1</option>
@@ -58,7 +58,7 @@
     </div>
     <h2>
         <button type="submit">
-            Show questions
+            Start Quiz
             <img class="show-button-icon" src="~/right-arrow.png" />
         </button>
     </h2>
@@ -68,64 +68,7 @@
     <h1 class="display-4">Quiz Questions</h1>
     @if (Model.Questions != null)
     {
-        <table>
-            <thead>
-                <tr>
-                    <th>Question</th>
-                    <th>Id </th>
-                    <th>Answers</th>
-                    <th>MultipleCorrectAnswers </th>
-                    <th>Correct Answers</th>
-                    <th>Correct Answer</th>
-                    <th>Category</th>
-                    <th>Difficulty</th>
-                </tr>
-            </thead>
-            <tbody>
-                @{
-                    List<QuestionModel> Pytania = new List<QuestionModel>();
-                }
-                @foreach (var question in Model.Questions)
-                {
-
-                    Pytania.Add(question);
-                }
-                @foreach (var pytanie in Pytania)
-                {
-                    <tr>
-                        <td>@pytanie.Question</td>
-                        <td>@pytanie.Id</td>
-                        <td>
-                            <ul>
-                                <li>@pytanie.Answers.Answer_A</li>
-                                <li>@pytanie.Answers.Answer_B</li>
-                                <li>@pytanie.Answers.Answer_C</li>
-                                <li>@pytanie.Answers.Answer_D</li>
-                                <li>@pytanie.Answers.Answer_E</li>
-                                <li>@pytanie.Answers.Answer_F</li>
-                            </ul>
-                        </td>
-                        <td>@pytanie.MultipleCorrectAnswers</td>
-                        <td>
-                            <ul>
-                                <li>@pytanie.Correct_Answers.Answer_A_Correct.ToString()</li>
-                                <li>@pytanie.Correct_Answers.Answer_B_Correct.ToString()</li>
-                                <li>@pytanie.Correct_Answers.Answer_C_Correct.ToString()</li>
-                                <li>@pytanie.Correct_Answers.Answer_D_Correct.ToString()</li>
-                                <li>@pytanie.Correct_Answers.Answer_E_Correct.ToString()</li>
-                                <li>@pytanie.Correct_Answers.Answer_F_Correct.ToString()</li>
-                            </ul>
-                        </td>
-                        <td>@pytanie.Correct_Answer</td>
-                        <td>@pytanie.Category</td>
-                        <td>@pytanie.Difficulty</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-
-
-
+       
         <div id="questionInfoContainer">
         </div>
         <div id="questionsContainer">
@@ -134,15 +77,11 @@
         <div id="countdownContainer">
 
         </div>
-       <div id="testContainer">
-
-           </div>
-
-       
+      
     }
     else
     {
-        <p class="text-center">Brak dostępnych pytań.</p>
+        <p class="text-center">No questions found.</p>
     }
 </div>
 <script>
@@ -195,14 +134,16 @@
                     button.innerHTML = key.slice(-1) + ". " + currentQuestion.answers[key];
                     button.addEventListener("click", function (event) {
                         // Funkcja obsługująca kliknięcie w odpowiedź
-                        
+                        var selectedKey = event.target.innerHTML.split(".")[0];
+                        checkAnswer(selectedKey, currentQuestion);
+                        console.log(selectedKey);
                         displayNextQuestion();
                     });
                     answerDiv.appendChild(button);
                     questionsContainer.appendChild(answerDiv);
                 }
             }
-            testContainer.innerHTML += "odpowiedzi:";
+            
 
            
             // Uruchom odliczanie
@@ -215,7 +156,14 @@
             // Opcjonalnie możesz dodać obsługę zakończenia quizu
         }
     }
-    function checkAnswer(selectedKet, currentQuestion){
+    function checkAnswer(selectedKey, currentQuestion){
+        var s = currentQuestion.correct_Answers;
+        if (s["answer_" + selectedKey + "_Correct"]) {
+            correctAnswersCount++;
+        }
+        //console.log(s);
+        
+       
 
     }
    
