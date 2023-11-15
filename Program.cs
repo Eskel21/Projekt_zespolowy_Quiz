@@ -51,7 +51,8 @@ namespace Projekt_zespo³owy_Quiz
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapRazorPages();  // Mapowanie endpointów dla stron Razor Pages
+                endpoints.MapRazorPages();// Mapowanie endpointów dla stron Razor Pages
+                
             });
         }
     }

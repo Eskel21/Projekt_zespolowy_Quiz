@@ -16,6 +16,10 @@ public class QuestionModel
     public List<TagModel> Tags { get; set; }
     public string Category { get; set; }
     public string Difficulty { get; set; }
+    public override string ToString()
+    {
+        return "Treść: " + Question + "\n" + "Odpowiedź A: " + Answers.Answer_A + "\n" + "Odpowiedź B: " + Answers.Answer_B + "\n" + "Odpowiedź C: " + Answers.Answer_C + "\n" + "Odpowiedź D: " + Answers.Answer_D + "\n" + "Odpowiedź E: " + Answers.Answer_E + "\n" + "Odpowiedź F: " + Answers.Answer_F + "\n";
+    }
 }
 
 public class AnswersModel
@@ -45,6 +49,9 @@ public class TagModel
 
 
 }
+
+
+
 
 
 
