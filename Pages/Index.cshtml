@@ -134,9 +134,9 @@
         <div id="countdownContainer">
 
         </div>
-        <dib id="testContainer">
+       <div id="testContainer">
 
-        </dib>
+           </div>
 
        
     }
@@ -163,6 +163,7 @@
     var countdownTime = 20; // Czas w sekundach
     var countdownInterval; // Zmienna przechowująca identyfikator interwału
     var countdownActive = false; // Zmienna informująca, czy odliczanie jest aktywne
+    
 
     // Funkcja do wyświetlania pytania
     function displayNextQuestion() {
@@ -202,13 +203,8 @@
                 }
             }
             testContainer.innerHTML += "odpowiedzi:";
-            for (var c_answer in currentQuestion.correct_answers) {
-                if (currentQuestion.correct_answers.hasOwnProperty(c_answer) && currentQuestion.correct_answers[c_answer] !== null) {
-                    var diverse = document.createElement("div");
-                    diverse.innerHTML = c_answer + " , " + currentQuestion.correct_answers[c_answer];
-                    testContainer.appendChild(diverse);
-                }
-            }
+
+           
             // Uruchom odliczanie
             startCountdown();
 
@@ -219,7 +215,7 @@
             // Opcjonalnie możesz dodać obsługę zakończenia quizu
         }
     }
-    function checkAnswer(){
+    function checkAnswer(selectedKet, currentQuestion){
 
     }
    
