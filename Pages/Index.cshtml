@@ -71,12 +71,13 @@
        
         <div id="questionInfoContainer">
         </div>
+        <div id="countdownContainer">
+           
+        </div>
         <div id="questionsContainer">
                        
         </div>
-        <div id="countdownContainer">
-
-        </div>
+        
       
     }
     else
@@ -120,18 +121,22 @@
             var currentQuestion = questions[currentQuestionIndex];
 
             // Dodaj informację o bieżącym pytaniu
-            questionInfoContainer.innerHTML = "Pytanie " + (currentQuestionIndex + 1) + "/" + questions.length;
+            questionInfoContainer.innerHTML = "Question " + (currentQuestionIndex + 1) + "/" + questions.length;
 
+            var paragraf = document.createElement("p");
             // Dodaj treść pytania
-            questionsContainer.innerHTML += "<p>" + currentQuestion.question + "</p>";
+            paragraf.id = "content";
+            paragraf.innerHTML +=currentQuestion.question;
+            questionsContainer.appendChild(paragraf);
            
             // Dodaj przyciski dla odpowiedzi w oddzielnych divach
             for (var key in currentQuestion.answers) {
                 if (currentQuestion.answers.hasOwnProperty(key) && currentQuestion.answers[key] !== null) {
                     var answerDiv = document.createElement("div");
                     var button = document.createElement("button");
+                    button.id = "answer_button";
                     
-                    button.innerHTML = key.slice(-1) + ". " + currentQuestion.answers[key];
+                    button.innerHTML = key.slice(-1) + ") " + currentQuestion.answers[key];
                     button.addEventListener("click", function (event) {
                         // Funkcja obsługująca kliknięcie w odpowiedź
                         var selectedKey = event.target.innerHTML.split(".")[0];
@@ -170,16 +175,17 @@
 
     // Funkcja do uruchamiania odliczania
     function startCountdown() {
-        countdownTime = 20; // Zresetuj czas odliczania
+        countdownTime = 19; // Zresetuj czas odliczania
         countdownActive = true; // Ustaw flagę aktywności odliczania
-
+        countdownContainer.innerHTML = "Time left: 20s";
         countdownInterval = setInterval(function () {
-            countdownContainer.innerHTML = "Czas do następnego pytania: " + countdownTime + "s";
+            countdownContainer.innerHTML = "Time left: " + countdownTime + "s";
 
             if (countdownTime <= 0) {
                 clearInterval(countdownInterval);
                 countdownActive = false; // Zresetuj flagę aktywności odliczania
                 displayNextQuestion();
+                countdownTime = 20;
             }
 
             countdownTime--;
@@ -190,7 +196,8 @@
 
     // Funkcja do wyświetlania wyników
     function displayResults() {
-        questionsContainer.innerHTML = "Wynik: " + correctAnswersCount+"/"+questions.length;
+        questionInfoContainer.innerHTML = "Wynik: " + correctAnswersCount+"/"+questions.length;
+
     }
 
     // Wywołaj funkcję, aby wyświetlić pierwsze pytanie
