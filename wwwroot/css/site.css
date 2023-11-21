@@ -19,6 +19,7 @@ header {
     justify-content: center;
     align-items: center;
     height: 60px;
+    width:100%;
 }
 
 .navbar-nav {
@@ -78,6 +79,11 @@ body {
     color: #192E51;
     display: flex;
     flex-direction: column;
+
+}
+body, header {
+    margin: 0;
+    padding: 0;
 }
 
 tr {
@@ -154,6 +160,7 @@ footer{
 }
 .container{
     flex-direction:row;
+
 }
 
 /*NAZWY LIST*/
@@ -198,6 +205,11 @@ footer{
     font-size:24px;
 
 }
+#answer_button:hover {
+        background: #192E51;
+        color: #C6DBFE;
+        transform: scale(1.1);
+    }
 #content {
     color: #192E51;
     text-align: center;
@@ -224,6 +236,19 @@ footer{
     border: 1px solid #192E51;
 }
 #questionInfoContainer {
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    height: 35px;
+    padding: 10px;
+    justify-content: center;
+    color: #192E51;
+    align-items: center;
+    gap: 10px;
+    font-size: 30px;
+}
+#resultContainer {
     margin: 10px;
     display: flex;
     flex-direction: column;

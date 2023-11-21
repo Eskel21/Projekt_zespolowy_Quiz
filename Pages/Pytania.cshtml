@@ -1,0 +1,167 @@
+﻿@page
+@model IndexModel
+@{
+}
+<div class="text-center">
+    @if (Model.Questions != null)
+    {
+
+        <div id="questionInfoContainer">
+        </div>
+        <div id="countdownContainer">
+        </div>
+        <div id="questionsContainer">
+        </div>
+        <div id="imageContainer">
+
+            <p id="good" style="display: none;"> <img id="resultImage" src="~/200.gif"> </p>
+            <p id="bad" style="display:none;"> <img id="resultImage" src="~/sad.gif"></p>
+            <p id="ok" style="display:none;"><img id="resultImage" src="~/rdj.gif"></p>
+        </div>
+        <div id="resultContainer">
+            
+            </div>
+
+
+    }
+
+</div>
+<script>
+    // Tablica z pytaniami
+    var questions = @Html.Raw(Json.Serialize(Model.Questions));
+
+    // Pobierz referencje do elementów DOM
+    var questionsContainer = document.getElementById("questionsContainer");
+    var countdownContainer = document.getElementById("countdownContainer");
+    var questionInfoContainer = document.getElementById("questionInfoContainer");
+    var resultContainer = document.getElementById("resultContainer");
+    var testContainer = document.getElementById("testContainer");
+
+
+    // Zmienne do przechowywania aktualnego indeksu pytania i liczby poprawnych odpowiedzi
+    var currentQuestionIndex = 0;
+    var correctAnswersCount = 0;
+
+    var countdownTime = 20; // Czas w sekundach
+    var countdownInterval; // Zmienna przechowująca identyfikator interwału
+    var countdownActive = false; // Zmienna informująca, czy odliczanie jest aktywne
+
+
+    // Funkcja do wyświetlania pytania
+    function displayNextQuestion() {
+        // Wyczyść zawartość kontenerów przed dodaniem nowych danych
+        questionsContainer.innerHTML = "";
+        countdownContainer.innerHTML = "";
+
+        if (countdownActive) {
+            // Jeśli odliczanie jest aktywne, zatrzymaj je
+            clearInterval(countdownInterval);
+            countdownActive = false;
+        }
+
+        if (currentQuestionIndex < questions.length) {
+            var currentQuestion = questions[currentQuestionIndex];
+
+            // Dodaj informację o bieżącym pytaniu
+            questionInfoContainer.innerHTML = "Question " + (currentQuestionIndex + 1) + "/" + questions.length;
+
+            var paragraf = document.createElement("p");
+            // Dodaj treść pytania
+            paragraf.id = "content";
+            paragraf.innerHTML += currentQuestion.question;
+            questionsContainer.appendChild(paragraf);
+
+            // Dodaj przyciski dla odpowiedzi w oddzielnych divach
+            for (var key in currentQuestion.answers) {
+                if (currentQuestion.answers.hasOwnProperty(key) && currentQuestion.answers[key] !== null) {
+                    var answerDiv = document.createElement("div");
+                    var button = document.createElement("button");
+                    button.id = "answer_button";
+
+                    button.innerHTML = key.slice(-1) + ") " + currentQuestion.answers[key];
+                    button.addEventListener("click", function (event) {
+                        // Funkcja obsługująca kliknięcie w odpowiedź
+                        var selectedKey = event.target.innerHTML.split(")")[0];
+                        checkAnswer(selectedKey, currentQuestion);
+                        console.log(selectedKey);
+                        displayNextQuestion();
+                    });
+                    answerDiv.appendChild(button);
+                    questionsContainer.appendChild(answerDiv);
+                }
+            }
+
+
+
+            // Uruchom odliczanie
+            startCountdown();
+
+            currentQuestionIndex++;
+        } else {
+            questionInfoContainer.innerHTML = ""; // Wyczyść informację o pytaniu
+            displayResults();
+            // Opcjonalnie możesz dodać obsługę zakończenia quizu
+        }
+    }
+    function checkAnswer(selectedKey, currentQuestion) {
+        var s = currentQuestion.correct_Answers;
+        if (s["answer_" + selectedKey + "_Correct"]) {
+            correctAnswersCount++;
+        }
+        //console.log(s);
+
+
+
+    }
+
+
+    // Funkcja do uruchamiania odliczania
+    function startCountdown() {
+        countdownTime = 19; // Zresetuj czas odliczania
+        countdownActive = true; // Ustaw flagę aktywności odliczania
+        countdownContainer.innerHTML = "Time left: 20s";
+        countdownInterval = setInterval(function () {
+            countdownContainer.innerHTML = "Time left: " + countdownTime + "s";
+
+            if (countdownTime <= 0) {
+                clearInterval(countdownInterval);
+                countdownActive = false; // Zresetuj flagę aktywności odliczania
+                displayNextQuestion();
+                countdownTime = 20;
+            }
+
+            countdownTime--;
+        }, 1000);
+    }
+
+
+
+    // Funkcja do wyświetlania wyników
+    function displayResults() {
+        var paragraph_bad = document.getElementById("bad");
+        var paragraph_good = document.getElementById("good");
+        var paragraph_ok = document.getElementById("ok");
+        var score = correctAnswersCount / questions.length;
+        if (score >= 0.8) {
+            paragraph_good.style.display = "block";
+        }
+        else {
+            if (score >= 0.5) {
+                paragraph_ok.style.display = "block";
+            }
+            else {
+                paragraph_bad.style.display = "block";
+            }
+        }
+        
+        resultContainer.innerHTML = "Wynik: " + correctAnswersCount + "/" + questions.length + '<img src="~/200.gif">';
+        countdownContainer.remove();
+        questionInfoContainer.remove();
+        questionsContainer.remove();
+        
+       
+    }
+
+    // Wywołaj funkcję, aby wyświetlić pierwsze pytanie
+    displayNextQuestion();
+</script>
