@@ -1,0 +1,316 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+header {
+    background: #192E51;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    width: 100%;
+}
+
+.navbar-nav {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-item {
+    margin: 10px;
+    margin-right: 28px;
+
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #C6DBFE;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+}
+
+.form-control {
+    display: block;
+    width: 400px;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    font-family: Lexend;
+    color: #C6DBFE;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 0.25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    /* align-items: center;
+    justify-content: center;
+    text-align: center;*/
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+body {
+    margin-bottom: 60px;
+    background: #C6DBFE;
+    font-family: Lexend;
+    color: #192E51;
+    display: flex;
+    flex-direction: column;
+}
+
+body, header {
+    margin: 0;
+    padding: 0;
+}
+
+tr {
+    padding: 10px;
+    border: solid;
+}
+
+td {
+    border: solid;
+    padding: 10px;
+    margin: 10px;
+}
+
+h2 {
+    margin: 10px;
+}
+
+table {
+    border: solid;
+}
+
+th {
+    border: solid;
+}
+
+button {
+    display: flex;
+    width: 10vw;
+    height: auto;
+    padding: 16px;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 15px;
+    background: #192E51;
+    color: #C6DBFE;
+    font-family: Lexend;
+    font-weight: 400;
+    text-align: center;
+    justify-content: center;
+}
+
+.rozwiaz-quiz {
+    display: flex;
+    width: 160px;
+    height: 24px;
+    padding: 16px;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 15px;
+    background: #192E51;
+    color: #C6DBFE;
+    font-family: Lexend;
+    font-weight: 400;
+}
+
+.show-button-icon {
+    margin-left: 8px;
+    height: 16px;
+    width: 16px;
+}
+
+.show-cat-icon {
+    height: 52px;
+}
+
+.footer-icon {
+    margin-left: 8px;
+    height: 52px;
+}
+
+footer {
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.container {
+    flex-direction: row;
+}
+.start_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+/*NAZWY LIST*/
+/*.form-group{
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+}*/
+
+#questionsContainer {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+#nextButton {
+    margin: 0 auto;
+}
+
+.text-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#answer_button {
+    display: inline-flex;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 15px;
+    border: 2px solid #577ED3;
+    background: #B5D0FF;
+    color: #577ED3;
+    font-weight: 700;
+    width: 600px;
+    margin: 10px;
+    font-size: 24px;
+}
+
+    #answer_button:hover {
+        background: #192E51;
+        color: #C6DBFE;
+        transform: scale(1.1);
+    }
+
+#content {
+    color: #192E51;
+    text-align: center;
+    font-family: Lexend;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 48px;
+    letter-spacing: -0.48px;
+}
+
+#countdownContainer {
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    height: 35px;
+    padding: 10px;
+    justify-content: center;
+    color: #192E51;
+    align-items: center;
+    gap: 10px;
+    font-size: 30px;
+    border-radius: 25px;
+    border: 1px solid #192E51;
+}
+
+#questionInfoContainer {
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    height: 35px;
+    padding: 10px;
+    justify-content: center;
+    color: #192E51;
+    align-items: center;
+    gap: 10px;
+    font-size: 30px;
+}
+
+#resultContainer {
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    height: 35px;
+    padding: 10px;
+    justify-content: center;
+    color: #192E51;
+    align-items: center;
+    gap: 10px;
+    font-size: 30px;
+}
+#alert-success {
+    display: inline-flex;
+    padding: 33px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 25px;
+    border: 3px solid #4B772A;
+    background: #D4F1BE;
+}
+#alert-wrong {
+    display: inline-flex;
+    padding: 33px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 25px;
+    border: 3px solid #A54427;
+    background: #F1CABE;
+}
+#row {
+    display: inline-flex;
+    padding: 33px;
+    justify-content: center;
+    align-items: center;
+    
+}
+h1 {
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+
+}
