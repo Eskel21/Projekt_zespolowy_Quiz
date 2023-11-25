@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
 html {
     font-size: 14px;
 }
@@ -32,7 +34,6 @@ header {
 .nav-item {
     margin: 10px;
     margin-right: 28px;
-
 }
 
 .nav-link {
@@ -168,6 +169,7 @@ footer {
 .container {
     flex-direction: row;
 }
+
 .start_container {
     display: flex;
     flex-direction: column;
@@ -278,6 +280,7 @@ footer {
     gap: 10px;
     font-size: 30px;
 }
+
 #alert-success {
     display: inline-flex;
     padding: 33px;
@@ -286,8 +289,54 @@ footer {
     gap: 10px;
     border-radius: 25px;
     border: 3px solid #4B772A;
-    background: #D4F1BE;
 }
+
+#alert-success {
+    position: relative;
+    padding-left: 20px;
+}
+
+    #alert-success::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        height: 100%;
+        width: 0;
+        border-radius: 25px;
+        background-color: #D4F1BE;
+        animation: loading 3s infinite;
+    }
+
+#alert-wrong {
+    position: relative;
+    padding-left: 20px;
+}
+
+    #alert-wrong::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        height: 100%;
+        width: 0;
+        border-radius: 25px;
+        background-color: #F1CABE;
+        animation: loading 3s infinite;
+    }
+
+@keyframes loading {
+    0% {
+        width: 0%;
+    }
+
+    100% {
+        width: 100%;
+    }
+}
+
 #alert-wrong {
     display: inline-flex;
     padding: 33px;
@@ -296,15 +345,15 @@ footer {
     gap: 10px;
     border-radius: 25px;
     border: 3px solid #A54427;
-    background: #F1CABE;
 }
+
 #row {
     display: inline-flex;
     padding: 33px;
     justify-content: center;
     align-items: center;
-    
 }
+
 h1 {
     margin: 10px;
     display: flex;
@@ -312,5 +361,49 @@ h1 {
     padding: 10px;
     justify-content: center;
     align-items: center;
+}
 
+.display-4 {
+    margin-bottom: 0.5em;
+    color: #192E51;
+    font-family: Lexend;
+    font-size: 15vh;
+    font-style: normal;
+    font-weight: 600;
+}
+
+.button-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 54px;
+}
+
+.button-nav {
+    margin: 0;
+}
+
+.button-link {
+    display: flex;
+    width: 48vh;
+    height: 16vh;
+    padding: 16px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+    border-radius: 15px;
+    background: #192E51;
+    box-sizing: border-box;
+    color: #C6DBFE;
+    font-size: 4vh;
+    font-weight: 500;
+    letter-spacing: -0.36px;
+}
+
+.arrow-icon {
+    --icon-size: 5vh;
+    width: var(--icon-size);
+    height: var(--icon-size);
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 42 42" fill="none"><path d="M8.75 21H33.25" stroke="%23C6DBFE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 8.75L33.25 21L21 33.25" stroke="%23C6DBFE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>');
 }
