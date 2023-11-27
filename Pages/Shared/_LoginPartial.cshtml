@@ -2,31 +2,31 @@
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
-<ul class="navbar-nav">
+<ul class="button-nav">
     @if (SignInManager.IsSignedIn(User))
     {
        
         
-        <li class="nav-item">
+        <ul class="nav-item">
             <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
                 <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
             </form>
-        </li>
+        </ul>
         
     }
     else
     {
-        <li class="nav-item">
+        <ul class="nav-item">
             <a class="button-link nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">
                 <span>Login</span>
                 <span class="arrow-icon"></span>
             </a>
-        </li>
-        <li class="nav-item">
+        </ul>
+        <ul class="nav-item">
             <a class="button-link nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">
                 <span>Register</span>
                 <span class="arrow-icon"></span>
             </a>
-        </li>
+        </ul>
     }
 </ul>
