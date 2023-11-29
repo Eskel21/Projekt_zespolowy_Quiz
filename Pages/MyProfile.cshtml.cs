@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Projekt_Quizy.Pages
 {
-    public class StartModel : PageModel
+    public class MyProfileModel : PageModel
     {
         public void OnGet()
         {

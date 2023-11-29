@@ -28,10 +28,12 @@ namespace Projekt_Quizy
                 options.UseSqlServer(connectionString));
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddRazorPages();  // Register Razor Pages support
+          
+
 
             // Register HttpClient with the base API address
             services.AddHttpClient<ApiService>(client =>
