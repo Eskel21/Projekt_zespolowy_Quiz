@@ -26,10 +26,18 @@
         <div class="Email">@User.FindFirstValue(ClaimTypes.Email)</div>
     </div>
 
+
+    <form method="post" enctype="multipart/form-data">
+        <label for="profileImage">Profile Image:</label>
+        <input type="file" id="profileImage" name="Picture" accept=".jpg, .jpeg, .png" />
+        <button type="submit">Save Changes</button>
+    </form>
+
+
     <form id="fixed-button" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
         <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
     </form>
-
+   
     }
     else
     {
