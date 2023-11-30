@@ -3,6 +3,7 @@
 #nullable disable
 
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -15,6 +16,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
@@ -29,6 +31,7 @@ namespace Projekt_Quizy.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<ApplicationUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private static readonly byte[] DefaultUserPicture = GetDefaultUserPicture();
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
@@ -80,17 +83,19 @@ namespace Projekt_Quizy.Areas.Identity.Pages.Account
             public string Email { get; set; }
 
             [Required]
-            [StringLength(25, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 5)]
+            [StringLength(25, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 3)]
             [Display(Name = "Name")]
             public string Name { get; set; }
             [Required]
-            [StringLength(25, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 5)]
+            [StringLength(25, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 3)]
             [Display(Name = "Surname")]
             public string Surname { get; set; }
             [Required]
-            [StringLength(25, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 5)]
+            [StringLength(25, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 3)]
             [Display(Name = "Nick")]
             public string Nick { get; set; }
+            [Display(Name = "User Picture")]
+            public byte[] Picture { get; set; }
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
@@ -129,6 +134,7 @@ namespace Projekt_Quizy.Areas.Identity.Pages.Account
                 user.Surname = Input.Surname;
                 await _userStore.SetUserNameAsync(user, Input.Nick, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+                user.Picture = DefaultUserPicture;
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
@@ -166,7 +172,20 @@ namespace Projekt_Quizy.Areas.Identity.Pages.Account
             // If we got this far, something failed, redisplay form
             return Page();
         }
+        private static byte[] GetDefaultUserPicture()
+        {
+            var imagePath = Path.Combine("wwwroot", "fi_user.png");
 
+            try
+            {
+                return System.IO.File.ReadAllBytes(imagePath);
+            }
+            catch (Exception)
+            {
+                // Jeśli wystąpi błąd (np. brak pliku), zwróć puste zdjęcie
+                return new byte[0];
+            }
+        }
         private ApplicationUser CreateUser()
         {
             try

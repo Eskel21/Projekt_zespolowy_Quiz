@@ -5,5 +5,6 @@ namespace Projekt_Quizy
     {
         public string Name { get; set; }
         public string Surname {  get; set; }
+        public byte[]? Picture { get; set; }
     }
 }

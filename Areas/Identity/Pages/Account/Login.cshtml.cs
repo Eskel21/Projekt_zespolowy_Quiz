@@ -65,7 +65,7 @@ namespace Projekt_Quizy.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [Required]
-            [StringLength(25,ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 5)]
+            [StringLength(25,ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 3)]
             public string Nick { get; set; }
 
             /// <summary>
