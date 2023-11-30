@@ -502,12 +502,15 @@ h1 {
     width: var(--icon-size);
     height: var(--icon-size);
     background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 42 42" fill="none"><path d="M8.75 21H33.25" stroke="%23C6DBFE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 8.75L33.25 21L21 33.25" stroke="%23C6DBFE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+    background-repeat: no-repeat;
 }
+
 .arrow-icon-login {
     --icon-size: 5vh;
     width: var(--icon-size);
     height: var(--icon-size);
     background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 42 42" fill="none"><path d="M8.75 21H33.25" stroke="%23C6DBFE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 8.75L33.25 21L21 33.25" stroke="%23C6DBFE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+    background-repeat: no-repeat;
 }
 
 eye-icon {
