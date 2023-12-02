@@ -16,8 +16,9 @@ namespace Projekt_Quizy.Data.Migrations
                 table: "AspNetUsers",
                 type: "varbinary(max)",
                 nullable: true);
+            
 
-           
+
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

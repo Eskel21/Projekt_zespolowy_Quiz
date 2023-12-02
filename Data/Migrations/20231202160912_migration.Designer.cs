@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Projekt_Quizy.Data;
 
@@ -11,9 +12,10 @@ using Projekt_Quizy.Data;
 namespace Projekt_Quizy.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231202160912_migration")]
+    partial class migration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -235,111 +237,6 @@ namespace Projekt_Quizy.Data.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("Projekt_Quizy.Data.Models.Dzial", b =>
-                {
-                    b.Property<int>("DzialId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DzialId"), 1L, 1);
-
-                    b.Property<string>("Nazwa")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
-
-                    b.HasKey("DzialId");
-
-                    b.ToTable("Dzialy");
-                });
-
-            modelBuilder.Entity("Projekt_Quizy.Data.Models.Kategoria", b =>
-                {
-                    b.Property<int>("KategoriaId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("KategoriaId"), 1L, 1);
-
-                    b.Property<int>("DzialId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Nazwa")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
-
-                    b.HasKey("KategoriaId");
-
-                    b.HasIndex("DzialId");
-
-                    b.ToTable("Kategorie");
-                });
-
-            modelBuilder.Entity("Projekt_Quizy.Data.Models.Pytanie", b =>
-                {
-                    b.Property<int>("PytanieId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PytanieId"), 1L, 1);
-
-                    b.Property<string>("Answer_A")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool?>("Answer_A_Correct")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Answer_B")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool?>("Answer_B_Correct")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Answer_C")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool?>("Answer_C_Correct")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Answer_D")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool?>("Answer_D_Correct")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Answer_E")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool?>("Answer_E_Correct")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Answer_F")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool?>("Answer_F_Correct")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("KategoriaId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("PoziomTrudnosci")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Tresc")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("varchar(200)");
-
-                    b.HasKey("PytanieId");
-
-                    b.HasIndex("KategoriaId");
-
-                    b.ToTable("Pytania");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -389,38 +286,6 @@ namespace Projekt_Quizy.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Projekt_Quizy.Data.Models.Kategoria", b =>
-                {
-                    b.HasOne("Projekt_Quizy.Data.Models.Dzial", "Dzial")
-                        .WithMany("Kategorie")
-                        .HasForeignKey("DzialId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Dzial");
-                });
-
-            modelBuilder.Entity("Projekt_Quizy.Data.Models.Pytanie", b =>
-                {
-                    b.HasOne("Projekt_Quizy.Data.Models.Kategoria", "Kategoria")
-                        .WithMany("Pytania")
-                        .HasForeignKey("KategoriaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Kategoria");
-                });
-
-            modelBuilder.Entity("Projekt_Quizy.Data.Models.Dzial", b =>
-                {
-                    b.Navigation("Kategorie");
-                });
-
-            modelBuilder.Entity("Projekt_Quizy.Data.Models.Kategoria", b =>
-                {
-                    b.Navigation("Pytania");
                 });
 #pragma warning restore 612, 618
         }
