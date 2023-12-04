@@ -232,7 +232,8 @@ footer {
 
 #countdownContainer {
     margin: 10px;
-    display: flex;
+    display: inline-flex;
+    position: relative;
     flex-direction: column;
     width: 400px;
     height: 35px;
@@ -244,7 +245,13 @@ footer {
     font-size: 30px;
     border-radius: 25px;
     border: 1px solid #192E51;
+    animation: countdownAnimation 20s linear forwards infinite;
+    background: linear-gradient(to right, #C6DBFE 50%, #577ED3 50%);
+    background-size: 200% 100%;
+    color: #000000;
+    transition: color 20s;
 }
+   
 
 #questionInfoContainer {
     margin: 10px;
@@ -322,6 +329,15 @@ footer {
 
     100% {
         width: 100%;
+    }
+}
+@keyframes countdownAnimation {
+    0% {
+        background-position: 100% 0;
+    }
+
+    100% {
+        background-position: 0 0;
     }
 }
 

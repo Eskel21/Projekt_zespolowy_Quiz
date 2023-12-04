@@ -1,0 +1,14 @@
+﻿@page
+@model DepartmentsModel
+@{
+    ViewData["Title"] = "Departments";
+}
+
+<h1>Departments</h1>
+
+@foreach (var department in Model.Departments)
+{
+    <p>
+        <a asp-page="/SelectQuiz" asp-route-dzialId="@department.DzialId">@department.Nazwa</a>
+    </p>
+}

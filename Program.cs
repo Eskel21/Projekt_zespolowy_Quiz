@@ -40,7 +40,7 @@ namespace Projekt_Quizy
             {
                 client.BaseAddress = new Uri("https://quizapi.io");
             });
-
+            services.AddScoped<LocalDbService>();
             // You can add additional service configurations if needed
         }
 

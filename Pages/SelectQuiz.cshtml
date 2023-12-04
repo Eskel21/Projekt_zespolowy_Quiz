@@ -1,0 +1,36 @@
+﻿@page
+@model SelectQuizModel
+@{
+    ViewData["Title"] = "Select Quiz";
+}
+
+<h1>Select Quiz</h1>
+
+<form method="post" asp-page-handler="SelectQuiz" asp-route-dzialId="@Model.DzialId">
+     <div class="form-group">
+        <label for="KategoriaId">Select Category:</label>
+        <select asp-for="KategoriaId" class="form-control" asp-items="Model.Kategorie">
+            <option value="">Choose category</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="SelectedLimit">Number of questions:</label>
+        <select class="form-control" id="limit" asp-for="LiczbaPytan">
+            <option value="10">10</option>
+            <option value="5">5</option>
+            <option value="10">10</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="PoziomTrudnosci">Select Difficulty Level:</label>
+        <select asp-for="PoziomTrudnosci" class="form-control">
+            <option value="Easy">Easy</option>
+            <option value="Medium">Medium</option>
+            <option value="Hard">Hard</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

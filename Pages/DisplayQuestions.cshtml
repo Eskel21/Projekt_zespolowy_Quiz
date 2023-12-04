@@ -1,6 +1,7 @@
 ﻿@page
-@model IndexModel
+@model DisplayQuestionsModel
 @{
+    ViewData["Title"] = "Display Questions";
 }
 <div class="text-center">
     @if (Model.Questions != null)
@@ -31,10 +32,10 @@
 
 </div>
 <script>
-    // Tablica z pytaniami
+    
     var questions = @Html.Raw(Json.Serialize(Model.Questions));
 
-    // Pobierz referencje do elementów DOM
+    
     var questionsContainer = document.getElementById("questionsContainer");
     var countdownContainer = document.getElementById("countdownContainer");
     var questionInfoContainer = document.getElementById("questionInfoContainer");
@@ -44,23 +45,23 @@
     var alertwrong = document.getElementById("alert-wrong");
 
 
-    // Zmienne do przechowywania aktualnego indeksu pytania i liczby poprawnych odpowiedzi
+    
     var currentQuestionIndex = 0;
     var correctAnswersCount = 0;
 
-    var countdownTime = 20; // Czas w sekundach
-    var countdownInterval; // Zmienna przechowująca identyfikator interwału
-    var countdownActive = false; // Zmienna informująca, czy odliczanie jest aktywne
+    var countdownTime = 20; 
+    var countdownInterval; 
+    var countdownActive = false; 
 
 
-    // Funkcja do wyświetlania pytania
+    
     function displayNextQuestion() {
-        // Wyczyść zawartość kontenerów przed dodaniem nowych danych
+        
         questionsContainer.innerHTML = "";
         countdownContainer.innerHTML = "";
 
         if (countdownActive) {
-            // Jeśli odliczanie jest aktywne, zatrzymaj je
+           
             clearInterval(countdownInterval);
             countdownActive = false;
         }
@@ -68,16 +69,16 @@
         if (currentQuestionIndex < questions.length) {
             var currentQuestion = questions[currentQuestionIndex];
 
-            // Dodaj informację o bieżącym pytaniu
+            
             questionInfoContainer.innerHTML = "Question " + (currentQuestionIndex + 1) + "/" + questions.length;
 
             var paragraf = document.createElement("p");
-            // Dodaj treść pytania
+            
             paragraf.id = "content";
             paragraf.innerHTML += currentQuestion.question;
             questionsContainer.appendChild(paragraf);
 
-            // Dodaj przyciski dla odpowiedzi w oddzielnych divach
+            
             for (var key in currentQuestion.answers) {
                 if (currentQuestion.answers.hasOwnProperty(key) && currentQuestion.answers[key] !== null) {
                     var answerDiv = document.createElement("div");
@@ -85,7 +86,7 @@
                     button.id = "answer_button";
                     button.innerHTML = key.slice(-1) + ") " + currentQuestion.answers[key];
                     button.addEventListener("click", function (event) {
-                        // Funkcja obsługująca kliknięcie w odpowiedź
+                        
                         var selectedKey = event.target.innerHTML.split(")")[0];
                         checkAnswer(selectedKey, currentQuestion);
                         console.log(selectedKey);
@@ -103,14 +104,14 @@
 
 
 
-            // Uruchom odliczanie
+            
             startCountdown();
 
             currentQuestionIndex++;
         } else {
-            questionInfoContainer.innerHTML = ""; // Wyczyść informację o pytaniu
+            questionInfoContainer.innerHTML = ""; 
             displayResults();
-            // Opcjonalnie możesz dodać obsługę zakończenia quizu
+           
         }
        
            
@@ -138,13 +139,13 @@
     }
 
 
-    // Funkcja do uruchamiania odliczania
+    
     function startCountdown() {
-        countdownTime = 19; // Zresetuj czas odliczania
-        countdownActive = true; // Ustaw flagę aktywności odliczania
+        countdownTime = 19; 
+        countdownActive = true; 
         countdownContainer.innerHTML = "Time left: 20s";
         countdownContainer.style.animation = 'none';
-        countdownContainer.offsetHeight; // Wymuszenie ponownego renderowania (re-flow)
+        countdownContainer.offsetHeight; 
         countdownContainer.style.animation = null;
         
         countdownInterval = setInterval(function () {
@@ -152,7 +153,7 @@
 
             if (countdownTime <= 0) {
                 clearInterval(countdownInterval);
-                countdownActive = false; // Zresetuj flagę aktywności odliczania
+                countdownActive = false; 
                 displayNextQuestion();
                 countdownTime = 20;
                 
@@ -164,7 +165,7 @@
 
 
 
-    // Funkcja do wyświetlania wyników
+   
     function displayResults() {
         var paragraph_bad = document.getElementById("bad");
         var paragraph_good = document.getElementById("good");
@@ -192,6 +193,6 @@
        
     }
 
-    // Wywołaj funkcję, aby wyświetlić pierwsze pytanie
+    
     displayNextQuestion();
 </script>
