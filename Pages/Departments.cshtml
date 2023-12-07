@@ -8,7 +8,14 @@
 
 @foreach (var department in Model.Departments)
 {
-    <p>
-        <a asp-page="/SelectQuiz" asp-route-dzialId="@department.DzialId">@department.Nazwa</a>
-    </p>
+    @if (department.Nazwa == "IT")
+    {
+        <a asp-page="/Quizy" asp-route-dzialId="@department.DzialId">@department.Nazwa</a>
+    }
+    else
+    {
+        <p>
+            <a asp-page="/SelectQuiz" asp-route-dzialId="@department.DzialId">@department.Nazwa</a>
+        </p>
+    }
 }
