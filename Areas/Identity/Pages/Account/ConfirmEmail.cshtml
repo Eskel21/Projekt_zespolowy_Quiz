@@ -1,0 +1,15 @@
+﻿@page
+@model ConfirmEmailModel
+@{
+    ViewData["Title"] = "Confirm email";
+}
+
+<h1>@ViewData["Title"]</h1>
+<partial name="_StatusMessage" model="Model.StatusMessage" />
+@section Scripts {
+    <script>
+        setTimeout(function () {
+            window.location.href = "/Index";
+        }, 5000); // Przekierowanie po 5 sekundach
+    </script>
+}

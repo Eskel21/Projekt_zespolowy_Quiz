@@ -567,3 +567,9 @@ h1 {
 .icon-input input {
     padding-left: 30px; /* Dostosuj iloœæ paddingu od lewej strony */
 }
+.btn-close {
+    display: none; 
+}
+.alert {
+    text-align: center;
+}
