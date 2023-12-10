@@ -4,47 +4,59 @@
     ViewData["Title"] = "Departments";
 }
 
-<h1>Departments</h1>
-<div class="departments-container">
-@foreach (var department in Model.Departments)
-{
-    <div class="department_div">
-    @if (department.Nazwa == "IT")
-    {
-        <p>
-        <a asp-page="/Quizy" asp-route-dzialId="@department.DzialId" asp-route-nazwaDzialu="@department.Nazwa"><img class="department_img" src="~/IT.png">  </a>
-            </p>
+<style>
+    .container {
+        display: flex;
+        overflow-x: auto;
+        max-width: 800px;
+        margin: 0 auto;
     }
-    @if (department.Nazwa == "Sport")
-    {
-        <p>
-                <a asp-page="/SelectQuiz" asp-route-dzialId="@department.DzialId" asp-route-nazwaDzialu="@department.Nazwa"><img class="department_img" src="~/Sport.png"></a>
-        </p>
+
+    .card {
+        width: 200px;
+        margin-right: 20px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        overflow: hidden;
+        text-decoration: none;
     }
-        @if (department.Nazwa == "Geography")
-        {
-            <p>
-                <a asp-page="/SelectQuiz" asp-route-dzialId="@department.DzialId" asp-route-nazwaDzialu="@department.Nazwa"><img class="department_img" src="~/Geography.png"></a>
-            </p>
-        }
-        @if (department.Nazwa == "History")
-        {
-            <p>
-                <a asp-page="/SelectQuiz" asp-route-dzialId="@department.DzialId" asp-route-nazwaDzialu="@department.Nazwa"><img class="department_img" src="~/History.png"></a>
-            </p>
-        }
-        @if (department.Nazwa == "Animals")
-        {
-            <p>
-                <a asp-page="/SelectQuiz" asp-route-dzialId="@department.DzialId" asp-route-nazwaDzialu="@department.Nazwa"><img class="department_img" src="~/Animals.png"></a>
-            </p>
-        }
-        @if (department.Nazwa == "Arts")
-        {
-            <p>
-                <a asp-page="/SelectQuiz" asp-route-dzialId="@department.DzialId" asp-route-nazwaDzialu="@department.Nazwa"><img class="department_img" src="~/Art.png"></a>
-            </p>
-        }
-    </div>
-}
+
+    .card img {
+        width: 100%;
+        height: auto;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .card-body {
+        padding: 15px;
+    }
+
+    .card-title {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .card-text {
+        font-size: 14px;
+        color: #666;
+        margin-bottom: 15px;
+    }
+</style>
+
+<h1>DEPARTMENTS</h1>
+
+<div class="container">
+    @foreach (var department in Model.Departments)
+    {
+        <a asp-page="/@(department.Nazwa == "IT" ? "Quizy" : "SelectQuiz")"
+           asp-route-dzialId="@department.DzialId"
+           asp-route-nazwaDzialu="@department.Nazwa">
+            <img class="img" src="image.jpg" alt="@($"Obrazek dla działu {department.Nazwa}")">
+        </a>
+            <div class="card-body">
+                <h5 class="card-title">@department.Nazwa</h5>
+                <p class="card-text">Podtytuły</p> 
+            </div>
+    }
 </div>
