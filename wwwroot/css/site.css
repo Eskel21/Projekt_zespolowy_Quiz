@@ -573,3 +573,12 @@ h1 {
 .alert {
     text-align: center;
 }
+.departments-container {
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.department_div {
+    display: inline-block; 
+    margin-right: 20px;
+}
