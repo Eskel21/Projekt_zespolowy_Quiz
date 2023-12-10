@@ -4,13 +4,13 @@
     ViewData["Title"] = "Select Quiz";
 }
 
-<h1>Select Quiz</h1>
+<h1>@Model.nazwadzialu</h1>
 
 <form method="post" asp-page-handler="SelectQuiz" asp-route-dzialId="@Model.DzialId">
      <div class="form-group">
         <label for="KategoriaId">Select Category:</label>
         <select asp-for="KategoriaId" class="form-control" asp-items="Model.Kategorie">
-            <option value="">Choose category</option>
+            <option value=0>Choose category</option>
         </select>
     </div>
 

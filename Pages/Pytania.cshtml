@@ -31,10 +31,10 @@
 
 </div>
 <script>
-    // Tablica z pytaniami
+    
     var questions = @Html.Raw(Json.Serialize(Model.Questions));
 
-    // Pobierz referencje do elementów DOM
+    
     var questionsContainer = document.getElementById("questionsContainer");
     var countdownContainer = document.getElementById("countdownContainer");
     var questionInfoContainer = document.getElementById("questionInfoContainer");
@@ -44,18 +44,18 @@
     var alertwrong = document.getElementById("alert-wrong");
 
 
-    // Zmienne do przechowywania aktualnego indeksu pytania i liczby poprawnych odpowiedzi
+    
     var currentQuestionIndex = 0;
     var correctAnswersCount = 0;
 
-    var countdownTime = 20; // Czas w sekundach
-    var countdownInterval; // Zmienna przechowująca identyfikator interwału
-    var countdownActive = false; // Zmienna informująca, czy odliczanie jest aktywne
+    var countdownTime = 20; 
+    var countdownInterval; 
+    var countdownActive = false; 
 
 
-    // Funkcja do wyświetlania pytania
+    
     function displayNextQuestion() {
-        // Wyczyść zawartość kontenerów przed dodaniem nowych danych
+        
         questionsContainer.innerHTML = "";
         countdownContainer.innerHTML = "";
 

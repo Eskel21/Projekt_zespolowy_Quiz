@@ -12,10 +12,10 @@ namespace Projekt_Quizy.Pages
             _logger = logger;
             _apiService = apiService;
         }
-        private readonly ApiService _apiService;  // Prywatne pole przechowujące instancję klasy ApiService.
+        private readonly ApiService _apiService; 
         public QuestionModel[] Pytania { get; set; }
 
-        public QuestionModel[] Questions { get; set; }  // Właściwość przechowująca pytania.
+        public QuestionModel[] Questions { get; set; }  
 
         [BindProperty(SupportsGet = true)]
         public string SelectedCategory { get; set; }
@@ -28,10 +28,12 @@ namespace Projekt_Quizy.Pages
 
         [BindProperty(SupportsGet = true)]
         public int SelectedLimit { get; set; }
+        [BindProperty(SupportsGet = true)]
+        public string nazwaDzialu { get; set; }
 
         public async Task OnPost()
         {
-            // Przekaż parametry filtrujące do serwisu API
+            
             _apiService.category_name = SelectedCategory;
             _apiService.difficulty_name = SelectedDifficulty;
             if (SelectedTags != null)
@@ -44,7 +46,7 @@ namespace Projekt_Quizy.Pages
             }
 
             _apiService.limit_number = SelectedLimit;
-            Questions = await _apiService.GetQuestionsAsync();  // Metoda OnGet, asynchronicznie pobiera pytania z ApiService i przypisuje je do właściwości Questions.
+            Questions = await _apiService.GetQuestionsAsync();  
         }
        
     }

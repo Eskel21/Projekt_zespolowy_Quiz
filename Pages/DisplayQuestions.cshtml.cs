@@ -29,21 +29,25 @@ public class DisplayQuestionsModel : PageModel
 
     public void OnGet()
     {
-        // Pobierz wszystkie pytania dla wybranej kategorii i poziomu trudnoœci
         var pytania = _context.Pytania
-            .Include(p => p.Kategoria)
-            .Where(p => p.KategoriaId == KategoriaId && p.PoziomTrudnosci == PoziomTrudnosci)
-            .ToList();
+                               .Where(p => p.PoziomTrudnosci == PoziomTrudnosci)
+                               .ToList();
 
-        // Jeœli liczba pytañ do wylosowania jest wiêksza ni¿ dostêpna liczba pytañ, ustaw maksymaln¹ mo¿liw¹ liczbê pytañ
-        LiczbaPytan = Math.Min(LiczbaPytan, pytania.Count);
-
-        // Losowo wybierz pytania
-        var losowePytania = LosowePytania(pytania);
-
-        // Konwertuj pytania na modele QuestionModel
-        Questions = ConvertToQuestionModels(losowePytania);
+        if (KategoriaId == 0)
+        {
+            LiczbaPytan = Math.Min(LiczbaPytan, pytania.Count);
+            var losowePytania = LosowePytania(pytania);
+            Questions = ConvertToQuestionModels(losowePytania);
+        }
+        else
+        {
+            var questions = pytania.Where(p => p.KategoriaId == KategoriaId).ToList();
+            LiczbaPytan = Math.Min(LiczbaPytan, questions.Count);
+            var randomPytania = LosowePytania(questions);
+            Questions = ConvertToQuestionModels(randomPytania);
+        }
     }
+
 
     private List<Pytanie> LosowePytania(List<Pytanie> pytania)
     {

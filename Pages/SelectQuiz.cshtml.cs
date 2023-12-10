@@ -11,7 +11,7 @@ using System.Linq;
 public class SelectQuizModel : PageModel
 {
     private readonly ApplicationDbContext _context;
-
+    public string nazwadzialu;
     public SelectQuizModel(ApplicationDbContext context)
     {
         _context = context;
@@ -33,7 +33,8 @@ public class SelectQuizModel : PageModel
 
     public void OnGet()
     {
-        // Filtruj kategorie tylko dla dzia³u o id=1
+        nazwadzialu = _context.Dzialy.Where(d => d.DzialId == DzialId).Select(d => d.Nazwa).FirstOrDefault();
+
         var kategorieDzialu = _context.Kategorie
             .Where(k => k.DzialId == DzialId)
             .ToList();
@@ -45,19 +46,19 @@ public class SelectQuizModel : PageModel
     {
         if (!ModelState.IsValid)
         {
-            // Handle validation errors
+            
             return Page();
         }
 
-        // Pobierz wszystkie pytania dla wybranej kategorii i poziomu trudnoœci
+       
         var pytania = _context.Pytania
-            .Where(p => p.KategoriaId == KategoriaId && p.PoziomTrudnosci == PoziomTrudnosci)
+            .Where(p => p.PoziomTrudnosci == PoziomTrudnosci)
             .ToList();
 
-        // Jeœli liczba pytañ do wylosowania jest wiêksza ni¿ dostêpna liczba pytañ, ustaw maksymaln¹ mo¿liw¹ liczbê pytañ
+       
         LiczbaPytan = Math.Min(LiczbaPytan, pytania.Count);
 
-        // Losowo wybierz pytania
+       
         var losowePytania = LosowePytania(pytania);
 
         return RedirectToPage("/DisplayQuestions", new
