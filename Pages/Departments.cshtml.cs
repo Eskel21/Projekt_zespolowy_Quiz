@@ -14,7 +14,7 @@ public class DepartmentsModel : PageModel
     }
 
     public List<Dzial> Departments { get; set; }
-
+   
     public void OnGet()
     {
         Departments = _context.Dzialy.ToList();
