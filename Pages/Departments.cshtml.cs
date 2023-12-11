@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Projekt_Quizy.Data;
 using Projekt_Quizy.Data.Models;
@@ -19,4 +20,5 @@ public class DepartmentsModel : PageModel
     {
         Departments = _context.Dzialy.ToList();
     }
+    
 }

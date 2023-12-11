@@ -1,6 +1,8 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using Projekt_Quizy;
 using Projekt_Quizy.Data;
 using Projekt_Quizy.Data.Models;
 using System;
@@ -10,10 +12,11 @@ using System.Linq;
 public class DisplayQuestionsModel : PageModel
 {
     private readonly ApplicationDbContext _context;
-
-    public DisplayQuestionsModel(ApplicationDbContext context)
+    private readonly UserManager<ApplicationUser> _userManager;
+    public DisplayQuestionsModel(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
     {
         _context = context;
+        _userManager = userManager;
     }
 
     [BindProperty(SupportsGet = true)]

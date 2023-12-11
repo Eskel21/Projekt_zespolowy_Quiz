@@ -132,6 +132,8 @@ namespace Projekt_Quizy.Areas.Identity.Pages.Account
                 var user = CreateUser();
                 user.Name = Input.Name;
                 user.Surname = Input.Surname;
+                user.Points = 0;
+                user.PointsOverall = 0;
                 await _userStore.SetUserNameAsync(user, Input.Nick, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 user.Picture = DefaultUserPicture;

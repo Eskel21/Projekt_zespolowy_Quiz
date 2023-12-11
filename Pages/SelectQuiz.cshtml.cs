@@ -22,7 +22,7 @@ public class SelectQuizModel : PageModel
     public int DzialId { get; set; }
     [BindProperty]
     public int KategoriaId { get; set; }
-
+    
     [BindProperty]
     public int LiczbaPytan { get; set; }
 
@@ -38,11 +38,13 @@ public class SelectQuizModel : PageModel
         var kategorieDzialu = _context.Kategorie
             .Where(k => k.DzialId == DzialId)
             .ToList();
-
+        
+       
+        
         Kategorie = new SelectList(kategorieDzialu, "KategoriaId", "Nazwa");
     }
 
-    public IActionResult OnPost()
+    public async Task<IActionResult> OnPostAsync()
     {
         if (!ModelState.IsValid)
         {
@@ -50,7 +52,16 @@ public class SelectQuizModel : PageModel
             return Page();
         }
 
-       
+        var dzial = _context.Dzialy.FirstOrDefault(e => e.DzialId == DzialId);
+
+        if (dzial != null)
+        {
+            
+            dzial.licznik++;
+
+            
+            await _context.SaveChangesAsync();
+        }
         var pytania = _context.Pytania
             .Where(p => p.PoziomTrudnosci == PoziomTrudnosci)
             .ToList();
@@ -75,7 +86,7 @@ public class SelectQuizModel : PageModel
         var losowePytania = new List<Pytanie>();
         var rand = new Random();
 
-        // Losowo generuj indeksy pytañ
+        
         while (losoweIndeksy.Count < LiczbaPytan)
         {
             var losowyIndeks = rand.Next(0, pytania.Count);

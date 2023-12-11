@@ -574,20 +574,3 @@ h1 {
 .alert {
     text-align: center;
 }
-.departments-container {
-    overflow-x: auto;
-    white-space: nowrap;
-    margin:20px;
-    padding:20px;
-}
-
-.department_div {
-    display: inline-block; 
-    margin-right: 20px;
-}
-.department_img {
-    transition: transform 0.3s ease
-}
-.department_img:hover{
-    transform:scale(1.1);
-}

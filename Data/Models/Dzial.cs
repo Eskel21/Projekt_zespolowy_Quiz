@@ -14,6 +14,8 @@ namespace Projekt_Quizy.Data.Models
         [MaxLength(50)]
         [Column(TypeName = "varchar(200)")]
         public string Nazwa { get; set; }
+
+        public int licznik { get; set; }
         public virtual ICollection<Kategoria>? Kategorie
         {
             get; set;
