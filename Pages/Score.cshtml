@@ -1,0 +1,52 @@
+﻿@page
+@model Projekt_Quizy.Pages.ScoreModel
+@{
+}
+<div class="text-center">
+
+
+    <h1>Summary</h1>
+   
+        <div id="imageContainer">
+
+            <p id="good" style="display: none;"> <img id="resultImage" src="~/200.gif"> </p>
+            <p id="bad" style="display:none;"> <img id="resultImage" src="~/sad.gif"></p>
+            <p id="ok" style="display:none;"><img id="resultImage" src="~/rdj.gif"></p>
+        </div>
+        <div id="resultContainer">
+            
+            </div>
+
+
+    
+
+</div>
+<script>
+    
+    var correctAnswersCount = @Model.CorrectAnswers;
+    var overall = @Model.TotalQuestions;
+    console.log(correctAnswersCount);
+    console.log(overall);
+    var questionInfoContainer = document.getElementById("questionInfoContainer");
+    var resultContainer = document.getElementById("resultContainer");
+
+        var paragraph_bad = document.getElementById("bad");
+        var paragraph_good = document.getElementById("good");
+        var paragraph_ok = document.getElementById("ok");
+        var score = correctAnswersCount / overall;
+        if (score >= 0.8) {
+            paragraph_good.style.display = "block";
+        }
+        else {
+            if (score >= 0.5) {
+                paragraph_ok.style.display = "block";
+            }
+            else {
+                paragraph_bad.style.display = "block";
+            }
+        }
+        
+        resultContainer.innerHTML = "Wynik: " + correctAnswersCount + "/" + overall + '<img src="~/200.gif">';
+      
+       
+</script>

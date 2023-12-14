@@ -189,7 +189,10 @@
         questionsContainer.remove();
         alertsuccess.style.display = "none";
         alertwrong.style.display = "none";
-        
+        var url = "/Score?correctAnswers=" + correctAnswersCount + "&totalQuestions=" + questions.length;
+
+
+        window.location.href = url;
        
     }
 
