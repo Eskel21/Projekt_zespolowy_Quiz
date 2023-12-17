@@ -593,3 +593,43 @@ h1 {
     .department_img:hover {
         transform: scale(1.1);
     }
+
+.UserCointainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 610px;
+    border: 1px solid #ccc;
+    padding-right: 10px;
+    margin: 20px;
+    border-radius: 25px;
+    border: 3px solid #192E51;
+    background: #87B4FF;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 500;
+    color: #192E51;
+}
+
+    .UserCointainer img {
+        width: 112px;
+        height: 110px;
+        border-top-left-radius: 22px;
+        border-bottom-left-radius: 22px;
+        margin-right: 16px;
+    }
+
+    .UserCointainer ul {
+        padding: 0px;
+    }
+
+.UserInfoL {
+    margin-left: auto;
+    padding-right: 10px;
+}
+
+.DivNadDivy {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
