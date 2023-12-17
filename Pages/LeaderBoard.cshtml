@@ -1,0 +1,14 @@
+﻿@page
+@model Projekt_Quizy.Pages.LeaderBoardModel
+@{
+
+}
+<h1>LEADERS</h1>
+@foreach (var user in Model.BestUsers)
+{
+            <div class="UserCointainer">
+                <img src="data:image/jpeg;base64,@Convert.ToBase64String(@user.Picture)" alt="User Picture">
+                <ul class="User_username">@user.UserName</ul>
+                <ul class="User_points">@user.Points</ul>
+            </div>
+}
