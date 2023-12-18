@@ -115,7 +115,7 @@ namespace Projekt_Quizy.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-                    return LocalRedirect("~/Quizy");
+                    return LocalRedirect("~/Departments");
                 }
                 if (result.RequiresTwoFactor)
                 {

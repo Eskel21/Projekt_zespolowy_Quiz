@@ -85,15 +85,20 @@
                     button.id = "answer_button";
                     button.innerHTML = key.slice(-1) + ") " + currentQuestion.answers[key];
                     button.addEventListener("click", function (event) {
-                        // Funkcja obsługująca kliknięcie w odpowiedź
+                        clearInterval(countdownInterval);
                         var selectedKey = event.target.innerHTML.split(")")[0];
                         checkAnswer(selectedKey, currentQuestion);
                         console.log(selectedKey);
                         disableAllButtons();
                         setTimeout(function () {
-                            displayNextQuestion();
-                            alertsuccess.style.display = "none";
-                            alertwrong.style.display = "none";
+                           
+                                
+                                alertsuccess.style.display = "none";
+                                alertwrong.style.display = "none";
+                                
+                                displayNextQuestion();
+
+                            
                         }, 3000); 
                     });
                     answerDiv.appendChild(button);
@@ -103,14 +108,14 @@
 
 
 
-            // Uruchom odliczanie
+            
             startCountdown();
 
             currentQuestionIndex++;
         } else {
-            questionInfoContainer.innerHTML = ""; // Wyczyść informację o pytaniu
+            questionInfoContainer.innerHTML = ""; 
             displayResults();
-            // Opcjonalnie możesz dodać obsługę zakończenia quizu
+            
         }
        
            
@@ -196,6 +201,6 @@
        
     }
 
-    // Wywołaj funkcję, aby wyświetlić pierwsze pytanie
+    
     displayNextQuestion();
 </script>

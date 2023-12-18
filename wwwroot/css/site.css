@@ -77,6 +77,7 @@ body {
     font-family: Lexend;
     color: #192E51;
     display: flex;
+    height:100%;
     flex-direction: column;
 }
 
@@ -156,10 +157,11 @@ button {
 }
 
 footer {
+    margin-top: 25px;
     justify-content: center;
     display: flex;
+    
     flex-direction: row;
-    position: absolute;
     bottom: 0;
     width: 100%;
 }
@@ -304,7 +306,7 @@ footer {
         width: 0;
         border-radius: 25px;
         background-color: #D4F1BE;
-        animation: loading 3s infinite;
+        animation: loading 3s;
     }
 
 
@@ -319,7 +321,7 @@ footer {
     width: 0;
     border-radius: 25px;
     background-color: #F1CABE;
-    animation: loading 3s infinite;
+    animation: loading 3s;
 }
 
 @keyframes loading {
@@ -566,7 +568,7 @@ h1 {
     margin-bottom:8px;
 }
 .icon-input input {
-    padding-left: 30px; /* Dostosuj iloœæ paddingu od lewej strony */
+    padding-left: 35px; /* Dostosuj iloœæ paddingu od lewej strony */
 }
 .btn-close {
     display: none; 
