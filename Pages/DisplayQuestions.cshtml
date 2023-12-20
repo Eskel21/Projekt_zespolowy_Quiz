@@ -86,7 +86,7 @@
                     button.id = "answer_button";
                     button.innerHTML = key.slice(-1) + ") " + currentQuestion.answers[key];
                     button.addEventListener("click", function (event) {
-                        
+                        clearInterval(countdownInterval);
                         var selectedKey = event.target.innerHTML.split(")")[0];
                         checkAnswer(selectedKey, currentQuestion);
                         console.log(selectedKey);
