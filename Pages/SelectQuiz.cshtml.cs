@@ -74,6 +74,7 @@ public class SelectQuizModel : PageModel
 
         return RedirectToPage("/DisplayQuestions", new
         {
+            DzialId = DzialId,
             KategoriaId,
             LiczbaPytan,
             PoziomTrudnosci

@@ -10,12 +10,12 @@
     <div class="percent">
     <svg>
         <circle cx="105" cy="105" r="100"></circle>
-            <circle cx="105" cy="105" r="100" style="--percent: @((double)Model.user.Points / (double)Model.user.PointsOverall * 100) "></circle>
+            <circle cx="105" cy="105" r="100" style="--percent: @Math.Round(((double)Model.user.Points / (double)Model.user.PointsOverall) * 100) "></circle>
     </svg>
     <div class="number">
         
         <h3>
-           @((double)Model.user.Points / (double)Model.user.PointsOverall * 100)<span>%</span>
+                @Math.Round(((double)Model.user.Points / (double)Model.user.PointsOverall) * 100)<span>%</span>
         </h3>
     </div>
 </div>

@@ -21,7 +21,8 @@ public class DisplayQuestionsModel : PageModel
 
     [BindProperty(SupportsGet = true)]
     public int KategoriaId { get; set; }
-
+    [BindProperty(SupportsGet = true)]
+    public int DzialId { get; set; }
     [BindProperty(SupportsGet = true)]
     public int LiczbaPytan { get; set; }
 
@@ -32,8 +33,12 @@ public class DisplayQuestionsModel : PageModel
 
     public void OnGet()
     {
+        var kategorie = _context.Kategorie
+                                .Where(k=> k.DzialId == DzialId)
+                                .Select(k=> k.KategoriaId)
+                                .ToList();
         var pytania = _context.Pytania
-                               .Where(p => p.PoziomTrudnosci == PoziomTrudnosci)
+                               .Where(p => p.PoziomTrudnosci == PoziomTrudnosci && kategorie.Contains(p.KategoriaId))
                                .ToList();
 
         if (KategoriaId == 0)
