@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
 html {
     font-size: 14px;
     position: relative;
@@ -77,7 +78,7 @@ body {
     font-family: Lexend;
     color: #192E51;
     display: flex;
-    height:100%;
+    height: 100%;
     flex-direction: column;
 }
 
@@ -160,7 +161,6 @@ footer {
     margin-top: 25px;
     justify-content: center;
     display: flex;
-    
     flex-direction: row;
     bottom: 0;
     width: 100%;
@@ -185,7 +185,7 @@ footer {
     text-align: center;
     justify-content: center;
     align-items: center;
-    padding:25px;
+    padding: 25px;
 }
 
 #nextButton {
@@ -207,8 +207,8 @@ footer {
     gap: 10px;
     border-radius: 15px;
     border: 2px solid #577ED3;
-    background: #B5D0FF;
-    color: #577ED3;
+    background: #192E51;
+    color: #C6DBFE;
     font-weight: 700;
     width: 600px;
     margin: 10px;
@@ -217,8 +217,8 @@ footer {
 }
 
     #answer_button:hover {
-        background: #192E51;
-        color: #C6DBFE;
+        background: #B5D0FF;
+        color: #577ED3;
         transform: scale(1.1);
     }
 
@@ -254,7 +254,7 @@ footer {
     color: #000000;
     transition: color 20s;
 }
-   
+
 
 #questionInfoContainer {
     margin: 10px;
@@ -334,6 +334,7 @@ footer {
         width: 100%;
     }
 }
+
 @keyframes countdownAnimation {
     0% {
         background-position: 100% 0;
@@ -364,7 +365,7 @@ footer {
 }
 
 h1 {
-    font-size:84px;
+    font-size: 84px;
     margin: 10px;
     display: flex;
     flex-direction: column;
@@ -512,14 +513,14 @@ h1 {
 
 .ProfilePic {
     position: absolute;
-    top: 38%;
+    top: 35%;
     left: 5%;
     transform: translateY(-50%);
     width: 325px;
     height: 325px;
     border-radius: 50%;
     overflow: hidden;
-    background-color: #B5D0FF;
+    background-color: #C6DBFE;
 }
 
     .ProfilePic img {
@@ -566,17 +567,21 @@ h1 {
     position: absolute;
     margin-left: 8px; /* Dostosuj odleg³oœæ od lewej strony */
     height: 24px; /* Dostosuj wysokoœæ ikonki */
-    margin-bottom:8px;
+    margin-bottom: 8px;
 }
+
 .icon-input input {
     padding-left: 35px; /* Dostosuj iloœæ paddingu od lewej strony */
 }
+
 .btn-close {
-    display: none; 
+    display: none;
 }
+
 .alert {
     text-align: center;
 }
+
 .departments-container {
     overflow-x: auto;
     white-space: nowrap;
@@ -636,53 +641,124 @@ h1 {
     justify-content: center;
     align-items: center;
 }
-.card{
+
+.card {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    background-color: #ffffff;
-    margin: 0 20px;
+    background-color: #87B4FF;
+    margin: 50px;
     width: 280px;
     height: 350px;
-    border-radius: 5px;
+    border-radius: 25px;
     box-shadow: 0 10px 20px -10px rgba(0,0,0,0.2);
+}
 
-}
-.card .percent{
-    position:relative;
-}
-.card svg{
-    position: relative;
-    width:210px;
-    height:210px;
-    transform: rotate(-90deg);
-}
-    .card svg circle {
-        
-        width: 100%;
-        height: 100%;
-        fill: none;
-        stroke:#f0f0f0;
-        stroke-width: 10;
-        stroke-linecap: round;
+    .card .percent {
+        position: relative;
     }
-    .card svg circle:last-of-type{
-        stroke-dasharray: 625px;
-        stroke-dashoffset: calc(625px - (625px * var(--percent))/100);
-        stroke: #3498db;
 
+    .card svg {
+        position: relative;
+        width: 210px;
+        height: 210px;
+        transform: rotate(-90deg);
     }
-.card .number{
-    position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
+
+        .card svg circle {
+            width: 100%;
+            height: 100%;
+            fill: none;
+            stroke: #B5D0FF;
+            stroke-width: 10;
+            stroke-linecap: round;
+        }
+
+            .card svg circle:last-of-type {
+                stroke-dasharray: 625px;
+                stroke-dashoffset: calc(625px - (625px * var(--percent))/100);
+                stroke: #192E51;
+            }
+
+    .card .number {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+    }
+
+        .card .number h3 {
+            font-weight: 400;
+            font-size: 3.5rem;
+        }
+
+            .card .number h3 span {
+                font-size: 2rem;
+            }
+
+.ranking_position {
+    display: flex;
+    font-size: 30px;
+    text-align: center;
+    padding: 5px;
+    justify-content: center;
+    align-content: center;
+    border-radius: 25px;
+    border: 2px solid #192E51;
+    margin-top: 50px;
+    width: 400px;
+    height: 65px;
+    margin-left: auto;
+    margin-right: auto;
 }
-.card .number h3{
-    font-weight:200;
-    font-size:3.5rem;
+
+.klasa {
+    margin: 20px;
 }
-.card .number h3 span{
-    font-size:2rem;
+
+.custom-file-input::-webkit-file-upload-button {
+    visibility: hidden;
+}
+
+.custom-file-input::before {
+    content: 'Select some files';
+    display: inline-block;
+    background: #C6DBFE;
+    border: 1px solid #192E51;
+    border-radius: 3px;
+    padding: 5px 8px;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 10pt;
+    margin: 8px;
+    margin-right: -90px;
+}
+
+.custom-file-input:hover::before {
+    border-color: #192E51;
+}
+
+.wykresy {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    margin-top: 20px;
+}
+
+.departments-container::-webkit-scrollbar {
+    width: 10px;
+}
+
+.departments-container::-webkit-scrollbar-track {
+    background-color: #87B4FF;
+    border-radius: 20px 20px;
+}
+
+.departments-container::-webkit-scrollbar-thumb {
+    background-color: #192E51;
+    border-radius: 20px 20px;
 }

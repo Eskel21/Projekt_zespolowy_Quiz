@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Projekt_Quizy.Data;
+using Projekt_Quizy.Data.Models;
 
 namespace Projekt_Quizy.Pages
 {
@@ -23,6 +24,7 @@ namespace Projekt_Quizy.Pages
             _dbContext = dbContext;
            
         }
+        public List<Dzial> Departments { get; set; }
 
         public async Task<IActionResult> OnGet()
         {
@@ -30,6 +32,7 @@ namespace Projekt_Quizy.Pages
             user = await _userManager.GetUserAsync(User);
             UsersRank = _dbContext.Users.OrderByDescending(u => u.Points).ToList();
             CurrentUserRank = UsersRank.FindIndex(u => u.Id == user.Id) + 1;
+            Departments = await _dbContext.Dzialy.ToListAsync();
             return Page();
         }
 

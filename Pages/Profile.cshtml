@@ -1,25 +1,83 @@
 ﻿@page
 @model Projekt_Quizy.Pages.ProfileModel
 @{
-    <partial name="_ProfilePartial"/>
+    <partial name="_ProfilePartial" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 }
-<div>
-    <h5>Current ranking position:@Model.CurrentUserRank</h5>
+<div class="ranking_position">
+    <h5 class="klasa">Current ranking position: @Model.CurrentUserRank</h5>
 </div>
-<div class="card">
-    <div class="percent">
-    <svg>
-        <circle cx="105" cy="105" r="100"></circle>
-            <circle cx="105" cy="105" r="100" style="--percent: @Math.Round(((double)Model.user.Points / (double)Model.user.PointsOverall) * 100) "></circle>
-    </svg>
-    <div class="number">
-        
-        <h3>
-                @Math.Round(((double)Model.user.Points / (double)Model.user.PointsOverall) * 100)<span>%</span>
-        </h3>
+<div class="wykresy">
+    <div class="card">
+        <div class="percent">
+            <svg>
+                <circle cx="105" cy="105" r="100"></circle>
+                <circle cx="105" cy="105" r="100" style="--percent: @Math.Round(((double)Model.user.Points / (double)Model.user.PointsOverall) * 100) "></circle>
+            </svg>
+            <div class="number">
+
+                <h3>
+                    @Math.Round(((double)Model.user.Points / (double)Model.user.PointsOverall) * 100)<span>%</span>
+                </h3>
+            </div>
+        </div>
+        <div class="diagram_label">
+            <h4>Percentage score</h4>
+        </div>
     </div>
+    <canvas id="doughnutChart" style="width:100%; max-width:300px; height:100%; max-height:300px"></canvas>
 </div>
-<div class="diagram_label">
-    <h4>Percentage score</h4>
-</div>
-</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var departmentsData = @Html.Raw(Json.Serialize(Model.Departments));
+
+        var departmentNames = departmentsData.map(function (department) {
+            return department.nazwa;
+        });
+
+        var departmentCounters = departmentsData.map(function (department) {
+            return department.licznik;
+        });
+
+        var doughnutChartCanvas = document.getElementById("doughnutChart");
+
+        var doughnutChart = new Chart(doughnutChartCanvas, {
+            type: 'doughnut',
+            data: {
+                labels: departmentNames,
+                datasets: [{
+                    data: departmentCounters,
+                    backgroundColor: [
+                        'rgba(25, 46, 81, 0.9)',
+                        'rgba(135, 180, 255, 0.9)',
+                        'rgba(47, 76, 130, 0.9)',
+                        'rgba(87, 126, 211, 0.9)',
+                        'rgba(181, 208, 255, 0.9)',
+                        'rgba(5, 22, 42, 0.9)',
+                    ],
+                    borderColor: [
+                        'rgba(25, 46, 81, 1)',
+                        'rgba(135, 180, 255, 1',
+                        'rgba(47, 76, 130, 1',
+                        'rgba(87, 126, 211, 1)',
+                        'rgba(181, 208, 255, 1)',
+                        'rgba(5, 22, 42, 1)',
+
+                    ],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                legend: {
+                    display: true,
+                    position: 'bottom'
+                },
+                title: {
+                    display: true,
+                    text: 'Department Doughnut Chart'
+                }
+            }
+        });
+    });
+</script>
