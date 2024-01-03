@@ -1,25 +1,80 @@
 ﻿@page
 @model Projekt_Quizy.Pages.ProfileModel
 @{
-    <partial name="_ProfilePartial"/>
+    <partial name="_ProfilePartial" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 }
 <div>
     <h5>Current ranking position:@Model.CurrentUserRank</h5>
 </div>
 <div class="card">
     <div class="percent">
-    <svg>
-        <circle cx="105" cy="105" r="100"></circle>
+        <svg>
+            <circle cx="105" cy="105" r="100"></circle>
             <circle cx="105" cy="105" r="100" style="--percent: @Math.Round(((double)Model.user.Points / (double)Model.user.PointsOverall) * 100) "></circle>
-    </svg>
-    <div class="number">
-        
-        <h3>
+        </svg>
+        <div class="number">
+
+            <h3>
                 @Math.Round(((double)Model.user.Points / (double)Model.user.PointsOverall) * 100)<span>%</span>
-        </h3>
+            </h3>
+        </div>
+    </div>
+    <div class="diagram_label">
+        <h4>Percentage score</h4>
     </div>
 </div>
-<div class="diagram_label">
-    <h4>Percentage score</h4>
-</div>
-</div>
+<canvas id="doughnutChart" style="width:100%; max-width:300px; height:100%; max-height:300px"></canvas>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var departmentsData = @Html.Raw(Json.Serialize(Model.Departments));
+
+        var departmentNames = departmentsData.map(function (department) {
+            return department.nazwa;
+        });
+
+        var departmentCounters = departmentsData.map(function (department) {
+            return department.licznik;
+        });
+
+        var doughnutChartCanvas = document.getElementById("doughnutChart");
+
+        var doughnutChart = new Chart(doughnutChartCanvas, {
+            type: 'doughnut',
+            data: {
+                labels: departmentNames,
+                datasets: [{
+                    data: departmentCounters,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.7)',
+                        'rgba(54, 162, 235, 0.7)',
+                        'rgba(255, 206, 86, 0.7)',
+                        'rgba(75, 192, 192, 0.7)',
+                        'rgba(153, 102, 255, 0.7)',
+                        'rgba(255, 159, 64, 0.7)',
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)',
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                legend: {
+                    display: true,
+                    position: 'bottom'
+                },
+                title: {
+                    display: true,
+                    text: 'Department Doughnut Chart'
+                }
+            }
+        });
+    });
+</script>
