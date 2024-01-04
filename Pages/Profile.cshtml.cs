@@ -46,7 +46,7 @@ namespace Projekt_Quizy.Pages
                 using (var memoryStream = new MemoryStream())
                 {
                     await Picture.CopyToAsync(memoryStream);
-
+                    var user = await _userManager.GetUserAsync(User);
                     user.Picture = memoryStream.ToArray();
                     await _userManager.UpdateAsync(user);
                 }
