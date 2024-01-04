@@ -1,0 +1,26 @@
+﻿@page
+@model Projekt_Quizy.Pages.EditProfileModel
+@{
+    ViewData["Title"] = "Edit Profile";
+}
+
+<form method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" value="@ViewData["Name"]" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Surname"></label>
+        <input asp-for="Surname" class="form-control" value="@ViewData["Name"]" />
+        <span asp-validation-for="Surname" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+
+        <input type="submit" value="Save" class="btn btn-primary" />
+        <input type="submit" value="Powrót" class="btn btn-primary" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage" />
+    </div>
+</form>
