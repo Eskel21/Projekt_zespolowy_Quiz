@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Projekt_Quizy.Pages
+namespace Projekt_Quizy.Areas.Identity.Pages.Account.Manage
 {
     public class EditProfileModel : PageModel
     {
@@ -32,8 +32,8 @@ namespace Projekt_Quizy.Pages
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
-            ViewData["Name"] = user.Name;
-            ViewData["Surname"] = user.Surname;
+            Name = user.Name;
+            Surname = user.Surname;
 
             return Page();
         }
@@ -54,13 +54,10 @@ namespace Projekt_Quizy.Pages
 
             user.Name = Name;
             user.Surname = Surname;
-            if (!string.IsNullOrEmpty(Request.Form["ReturnUrl"]))
-            {
-                return Redirect(Request.Form["ReturnUrl"]);
-            }
+
             await _userManager.UpdateAsync(user);
 
-            return RedirectToPage("/Profile");
+            return RedirectToPage("./EditProfile");
         }
     }
 }
