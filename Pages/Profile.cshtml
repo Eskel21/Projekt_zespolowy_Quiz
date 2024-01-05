@@ -8,7 +8,19 @@
 <div class="ranking_position">
     <h5 class="klasa">Current ranking position: @Model.CurrentUserRank</h5>
 </div>
+
 <div class="wykresy">
+    <div class="przyciski">
+    <form method="post" enctype="multipart/form-data">
+        <label for="profileImage">Profile Image:</label>
+        <input class="custom-file-input" type="file" id="profileImage" name="Picture" accept=".jpg, .jpeg, .png" />
+        <button type="submit">Save Changes</button>
+    </form>
+
+    <form method="post" enctype="multipart/form-data">
+        <button type="button" onclick="window.location.href='/Identity/Account/Manage'" class="btn btn-primary">Edit account</button>
+    </form>
+    </div>
     <div class="card">
         <div class="percent">
             <svg>
