@@ -3,17 +3,17 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
-<div class="banner"><img src="~/Rectangle 3.png" /></div>
+    <div class="banner"><img src="~/Rectangle 3.png"/></div>
 
-@if (SignInManager.IsSignedIn(User))
-{
+    @if (SignInManager.IsSignedIn(User))
+    {
     <div class="ProfilePic">
         @if (User.Identity.IsAuthenticated)
         {
             var user = await UserManager.GetUserAsync(User);
             if (user != null && user.Picture != null)
             {
-                <div class="ProfileBackground">
+                <div class="ProfileBackground"> 
                     <img src="data:image/jpeg;base64,@Convert.ToBase64String(user.Picture)" alt="User Picture">
                 </div>
             }
@@ -31,17 +31,21 @@
 
     <form method="post" enctype="multipart/form-data">
         <label for="profileImage">Profile Image:</label>
-        <input class="custom-file-input" type="file" id="profileImage" name="Picture" accept=".jpg, .jpeg, .png" />
+        <input type="file" id="profileImage" name="Picture" accept=".jpg, .jpeg, .png" />
         <button type="submit">Save Changes</button>
+    </form>
+    
+     <form method="post" enctype="multipart/form-data">
+    <button type="button" onclick="window.location.href='/Identity/Account/Manage'" class="btn btn-primary">Edit account</button>
     </form>
 
 
     <form id="fixed-button" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
         <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
     </form>
-
-}
-else
-{
-    <div>Login Error</div>
-}
+   
+    }
+    else
+    {
+        <div>Login Error</div>
+    }
