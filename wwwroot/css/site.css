@@ -764,14 +764,46 @@ h1 {
 }
 
 .account-link {
-    text-decoration: none;
-    color: #192E51;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 600;
+    text-decoration:none;
+    display: flex;
+    width: 200px;
+    font-size: 20px;
+    height: auto;
+    padding: 16px;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 15px;
+    background: #192E51;
+    color: #C6DBFE;
+    font-family: Lexend;
+    font-weight: 400;
+    text-align: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-bottom:8px;
 }
 
 .col-md-6 {
     display: flex;
     flex-direction: row;
+}
+
+.manage_email {
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items:center;
+}
+.form-floating-v2 {
+    color: #192E51;
+    font-family: Lexend;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 32px;
+    letter-spacing: -0.24px;
+    gap: 22px;
+    width: 100%;
+    align-items: flex-end;
+    margin: 10px;
 }
